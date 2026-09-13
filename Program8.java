@@ -1,24 +1,39 @@
-/*
-Write a program that: 
-• Reads marks of 5 students into an integer array. 
-• Prints each student’s marks.
-*/
-import java.util.*;
-public class Program8
-{
-	public static void main(String args[])
-	{
-        	Scanner in = new Scanner(System.in);
-        	int[] marks = new int[5];
-        	for (int i = 0; i < 5; i++)
-		{
-            		System.out.print("Enter marks of student " + (i + 1) + ": ");
-            		marks[i] = in.nextInt();
-        	}
-        	System.out.println("Student Marks:");
-        	for (int i = 0; i < 5; i++)
-		{
-            		System.out.println("Student " + (i + 1) + ": " + marks[i]);
-        	}
-    	}
+import java.util.Scanner;
+
+class Vehicle {
+    void start() {
+        System.out.println("Vehicle starting...");
+    }
+}
+
+class Car extends Vehicle {
+    @Override
+    void start() {
+        System.out.println("Car starting...");
+    }
+}
+
+class Bike extends Vehicle {
+    @Override
+    void start() {
+        System.out.println("Bike starting...");
+    }
+}
+
+public class Program8 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String type = sc.nextLine().trim();
+            if (type.isEmpty()) continue;
+
+            Vehicle v;
+            if (type.equalsIgnoreCase("car"))
+                v = new Car();
+            else
+                v = new Bike();
+
+            v.start();
+        }
+    }
 }

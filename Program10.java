@@ -1,44 +1,49 @@
-/*
-Write a program that: 
-• Reads marks of 5 subjects into an array. 
-• Calculates the average marks. 
-• Uses if-else to assign grades: 
-o >= 90: A 
-o >= 75: B 
-o >= 50: C 
-o Else: Fail
-*/
-import java.util.*;
-public class Program10
-{
-	public static void main(String args[])
-	{
-        	Scanner in = new Scanner(System.in);
-        	int[] marks = new int[5];
-        	int sum = 0;
-        	for (int i = 0; i < 5; i++)
-		{
-            		System.out.print("Enter marks of subject " + (i + 1) + ": ");
-            		marks[i] = in.nextInt();
-            		sum = sum + marks[i];
-        	}
-        	double average = sum / 5.0;
-       		System.out.println("Average Marks: " + average);
-        	if (average >= 90) 
-		{
-            		System.out.println("Grade: A");
-        	}
-        	else if (average >= 75) 
-		{
-            		System.out.println("Grade: B");
-        	}
-        	else if (average >= 50)
-		{
-            		System.out.println("Grade: C");
-        	}
-       		 else
-		{
-            		System.out.println("Grade: Fail");
-        	}
-    	}
+import java.util.Scanner;
+
+abstract class Payment {
+    protected double amount;
+
+    Payment(double amount) {
+        this.amount = amount;
+    }
+
+    abstract void processPayment();
+}
+
+class CreditCardPayment extends Payment {
+    CreditCardPayment(double amount) { super(amount); }
+
+    void processPayment() {
+        System.out.println("Processing credit card payment of " + amount);
+        System.out.println("Credit card payment successful");
+    }
+}
+
+class UPIPayment extends Payment {
+    UPIPayment(double amount) { super(amount); }
+
+    void processPayment() {
+        System.out.println("Processing UPI payment of " + amount);
+        System.out.println("UPI payment successful");
+    }
+}
+
+public class Program10 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String[] p = sc.nextLine().trim().split("\\s+");
+            if (p.length < 2) continue;
+
+            double amount = Double.parseDouble(p[1]);
+            Payment payment;
+
+            if (p[0].equalsIgnoreCase("creditcard"))
+                payment = new CreditCardPayment(amount);
+            else
+                payment = new UPIPayment(amount);
+
+            payment.processPayment();
+        }
+    }
 }

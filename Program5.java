@@ -1,39 +1,41 @@
-/*
-Write a program that: 
-• Takes two numbers and an operator symbol (+, -, *, /) from the user. 
-• Uses if-else statements to perform the appropriate operation. 
-*/
-import java.util.*;
-public class Program5
-{
-	public static void main(String args[])
-	{
-		Scanner in = new Scanner(System.in);
-        	System.out.println("Enter first number: ");
-        	double a = in.nextDouble();
-        	System.out.println("Enter second number: ");
-        	double b = in.nextDouble();
-        	System.out.println("Enter operator (+, -, *, /): ");
-        	char operator = in.next().charAt(0);
-        	if (operator == '+')
-		{
-            		System.out.println("Result: " + (a + b));
-        	} 
-        	else if (operator == '-') 
-		{
-            		System.out.println("Result: " + (a - b));
-        	} 
-        	else if (operator == '*') 
-		{
-            		System.out.println("Result: " + (a * b));
-        	} 
-        	else if (operator == '/') 
-		{
-            		System.out.println("Result: " + (a / b));
-        	} 
-        	else 
-		{
-            		System.out.println("Invalid operator");
-       		 }
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int age;
+
+    Student() {
+        name = "Unknown";
+        age = 0;
+    }
+
+    Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    Student(Student other) {
+        this.name = other.name;
+        this.age = other.age;
+    }
+
+    void display(String type) {
+        System.out.println(type + " Constructor: Name=" + name + ", Age=" + age);
+    }
+}
+
+public class Program5 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        int age = sc.nextInt();
+
+        Student s1 = new Student();
+        Student s2 = new Student(name, age);
+        Student s3 = new Student(s2);
+
+        s1.display("Default");
+        s2.display("Parameterized");
+        s3.display("Copy");
     }
 }

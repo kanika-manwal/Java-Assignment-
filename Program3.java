@@ -1,20 +1,44 @@
-/*
-Accept two integers from the user and perform addition, subtraction, multiplication, division, and modulus. Display results for each operation.  
-*/
-import java.util.*;
-public class Program3
-{
-	public static void main(String args[])
-	{
-        	Scanner in = new Scanner(System.in);
-        	System.out.print("Enter first integer: ");
-        	int a = in.nextInt();
-        	System.out.print("Enter second integer: ");
-                int b = in.nextInt();
-        	System.out.println("Addition: " + (a + b));
-        	System.out.println("Subtraction: " + (a - b));
-        	System.out.println("Multiplication: " + (a * b));
-        	System.out.println("Division: " + (a / b));
-        	System.out.println("Modulus: " + (a % b));
-    	}
+import java.util.Scanner;
+
+abstract class Shape {
+    abstract double area();
+    abstract double perimeter();
+}
+
+class Circle extends Shape {
+    private double radius;
+    Circle(double radius) { this.radius = radius; }
+    double area() { return Math.PI * radius * radius; }
+    double perimeter() { return 2 * Math.PI * radius; }
+}
+
+class Rectangle extends Shape {
+    private double length, width;
+    Rectangle(double length, double width) {
+        this.length = length; this.width = width;
+    }
+    double area() { return length * width; }
+    double perimeter() { return 2 * (length + width); }
+}
+
+public class Program3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String type = sc.nextLine().trim();
+            if (type.isEmpty()) continue;
+
+            if (type.equalsIgnoreCase("circle")) {
+                double r = Double.parseDouble(sc.nextLine().trim());
+                Circle c = new Circle(r);
+                System.out.printf("Circle Area: %.2f%n", c.area());
+                System.out.printf("Circle Perimeter: %.2f%n", c.perimeter());
+            } else if (type.equalsIgnoreCase("rectangle")) {
+                String[] p = sc.nextLine().trim().split("\\s+");
+                Rectangle r = new Rectangle(Double.parseDouble(p[0]), Double.parseDouble(p[1]));
+                System.out.println("Rectangle Area: " + r.area());
+                System.out.println("Rectangle Perimeter: " + r.perimeter());
+            }
+        }
+    }
 }
